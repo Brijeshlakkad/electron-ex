@@ -6,10 +6,10 @@ let btnRead = document.getElementById('btnRead')
 let btnDelete = document.getElementById('btnDelete')
 let fileName = document.getElementById('fileName')
 let fileContent = document.getElementById('fileContent')
-
-let pathName = path.join(__dirname, 'Files')
+let filePath = document.getElementById('filePath')
 
 btnCreate.addEventListener('click', function () {
+    let pathName = filePath.value
     let file = path.join(pathName, fileName.value)
     let content = fileContent.value;
     fs.writeFile(file, content, function (err) {
@@ -21,6 +21,7 @@ btnCreate.addEventListener('click', function () {
 })
 
 btnRead.addEventListener('click', function () {
+    let pathName = filePath.value
     let file = path.join(pathName, fileName.value)
     fs.readFile(file, function (err, data) {
         if (err) {
@@ -32,6 +33,7 @@ btnRead.addEventListener('click', function () {
 })
 
 btnDelete.addEventListener('click', function () {
+    let pathName = filePath.value
     let file = path.join(pathName, fileName.value)
     let result = ipc.sendSync('file-delete')
     if (result == 0) {
