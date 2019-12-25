@@ -1,14 +1,54 @@
 {
   "name": "crud-file-project",
-  "version": "1.0.0",
+  "version": "0.0.1",
+  "license": "MIT",
   "description": "",
+  "author": "Brijesh Lakkad brijeshlakkad@gmail.com",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "postinstall": "install-app-deps",
+    "start": "npm install && electron .",
+    "dist": "electron-builder"
   },
-  "author": "Brijesh Lakkad",
-  "license": "MIT",
-  "dependencies": {
-    "electron": "^1.6.11"
+  "build": {
+    "appId": "com.brijeshlakkad.crud",
+    "compression": "normal",
+    "asar": true,
+    "extends": null,
+    "files": [
+        "main.js",
+        "build/*",
+        "node_modules/**/*",
+        "src/*"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "squirrel",
+      "icon": "build/icon.ico"
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "latest",
+    "electron-builder": "^21.2.0"
   }
 }
